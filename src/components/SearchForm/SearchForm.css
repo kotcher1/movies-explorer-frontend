@@ -1,0 +1,119 @@
+.search-form {
+  padding: 80px 0 0 ;
+}
+
+.search-form__container {
+  max-width: 1140px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #aaaaaa;
+  padding-bottom: 94px;
+}
+
+.search-form__search-line {
+  position: relative;
+  width: 100%;
+}
+
+.search-form__search-input {
+  padding: 15px 87px 15px 42px;
+  border: 1.5px solid #AAAAAA;
+  border-radius: 50px;
+  width: 100%;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  color: white;
+  background-color: transparent;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.search-from__search-input::placeholder {
+  color: #8B8B8B;
+}
+
+.search-form__search-button {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  background-color: #4285F4;
+  top: 8px;
+  right: 7px;
+  border: none;
+  border-radius: 50%;
+  background-image: url(../../images/chevron.svg);
+  background-position: center;
+  background-size: 5px 12px;
+  background-repeat: no-repeat;
+}
+
+.search-form__search-button:hover {
+  opacity: .6;
+}
+
+.search-form__sorting {
+  display: flex;
+  margin-left: 40px;
+  align-items: center;
+}
+
+.search-form__sotring-type {
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 18px;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.search-form__checkbox {
+  width: 36px;
+  height: 20px;
+  opacity: .6;
+  background-color: #3DDC84;
+  border: none;
+  -webkit-appearance: none;
+  outline: none;
+  margin-left: 14px;
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+}
+
+.search-form__checkbox:checked {
+  opacity: 1;
+}
+
+.search-form__checkbox:after {
+  width: 8px;
+  height: 8px;
+  left: 6px;
+  top: 6px;
+  background-color: white;
+  border-radius: 50%;
+  content: '';
+  position: absolute;
+}
+
+.search-form__checkbox:checked::after {
+  left: calc(100% - 14px);
+}
+
+
+@media screen and (max-width: 900px) {
+  .search-form__container {
+    flex-direction: column;
+    padding-bottom: 68px;
+  }
+
+  .search-form__sorting {
+    margin-left: 0;
+    margin-top: 38px;
+  }
+
+}
+
+
+

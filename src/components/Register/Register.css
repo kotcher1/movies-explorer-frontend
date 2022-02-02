@@ -1,0 +1,135 @@
+.register {
+  background-color: #202020;
+  padding: 0 70px;
+  display: flex;
+  min-height: 100vh;
+}
+
+.register__container {
+  max-width: 396px;
+  margin: auto;
+  width: 100%;
+}
+
+.register__title {
+  margin: 40px 0 16px;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  color: #FFFFFF;
+}
+
+.register__input-block {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.register__input-title {
+  margin: 0;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+  color: #8B8B8B;
+}
+
+.register__input {
+  padding: 5px 0 10px;
+  background-color: transparent;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #FFFFFF;
+  border: none;
+  border-bottom: 1px solid #424242;
+  outline: none;
+}
+
+.register__input_state_error {
+  color: #EE3465;
+}
+
+.register__input-error {
+  margin-top: 6px;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+  color: #EE3465;
+  display: none;
+}
+
+.register__input-error_visible {
+  display: block;
+}
+
+.register__button {
+  margin-top: 135px;
+  width: 100%;
+  background-color: #4285F4;
+  border-radius: 3px;
+  padding: 15px 20px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #FFFFFF;
+  cursor: pointer;
+  border: none;
+}
+
+.register__button:hover {
+  opacity: .6;
+}
+
+.register__sign-in-line {
+  display: flex;
+  margin-top: 16px;
+  align-items: center;
+  justify-content: center;
+}
+
+.register__sign-in-title {
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #8B8B8B;
+  margin: 0;
+}
+
+.register__sign-in-link {
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #4285F4;
+  margin: 0 0 0 6px;
+  text-decoration: none;
+}
+
+.register__sign-in-link:hover {
+  opacity: .6;
+}
+
+@media screen and (max-width: 640px) {
+  .register {
+    padding: 56px 30px 30px;
+    box-sizing: border-box;
+  }
+
+  .register__container {
+    margin: 0 auto;
+  }
+
+  .register__form {
+    max-height: calc(100% - 126px);
+    height: calc(100% - 126px);
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .register__title {
+    text-align: center;
+  }
+}
