@@ -27,10 +27,10 @@ const AboutMe = () => {
               фриланс-заказами и ушёл с постоянной работы.
             </p>
             <div className="student__social-links">
-              <a className="student__social-link" href="https://www.facebook.com/">
+              <a className="student__social-link" href="https://www.facebook.com/" target="_blank" rel="noreferrer">
                 Facebook
               </a>
-              <a className="student__social-link" href="https://github.com/">
+              <a className="student__social-link" href="https://github.com/" target="_blank" rel="noreferrer">
                 Github
               </a>
             </div>

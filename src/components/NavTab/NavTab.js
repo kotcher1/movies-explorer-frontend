@@ -17,9 +17,9 @@ const NavTab = (props) => {
       <div className={`navigation-tab__container ${props.mobileVisibility === 'hide' ? 'navigation-tab__container_view_mobile' : ''} ${!isMenuOpen && props.mobileVisibility === 'hide' ? 'navigation-tab__container_visibility_hidden' : ''}`}>
         <Navigation nav={props.nav} mobileVisibility={props.mobileVisibility}/>
         {props.param === 'button' && (
-          <button className="navigation-tab__button" type="button">
+          <a className="navigation-tab__button" href="/sign-in">
             Войти
-          </button>
+          </a>
         )}
         {props.param === 'account' && (
           <a className={`navigation-tab__account-block ${props.mobileVisibility === 'hide' ? 'navigation-tab__account-block_hidden' : ''} `} href="/profile">

@@ -10,7 +10,7 @@ const Main = () => {
   const navigation = [
     {
       name: 'Регистрация',
-      link: '/registration',
+      link: '/sign-up',
     }
   ]
 

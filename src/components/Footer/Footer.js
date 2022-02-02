@@ -15,17 +15,17 @@ const Footer = (props) => {
           <nav className="footer__navigation">
             <ul className="footer__navigation-list">
               <li className="footer__navigation-item">
-                <a className="footer__navigation-link" href="https://practicum.yandex.ru/">
+                <a className="footer__navigation-link" href="https://practicum.yandex.ru/" target="_blank" rel="noreferrer">
                   Яндекс.Практикум
                 </a>
               </li>
               <li className="footer__navigation-item">
-                <a className="footer__navigation-link" href="https://github.com/">
+                <a className="footer__navigation-link" href="https://github.com/" target="_blank" rel="noreferrer">
                   Github
                 </a>
               </li>
               <li className="footer__navigation-item">
-                <a className="footer__navigation-link" href="https://www.facebook.com/">
+                <a className="footer__navigation-link" href="https://www.facebook.com/" target="_blank" rel="noreferrer">
                   Facebook
                 </a>
               </li>
