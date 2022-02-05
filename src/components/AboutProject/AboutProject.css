@@ -1,0 +1,133 @@
+.about {
+  background-color: #202020;
+  padding: 110px 70px;
+}
+
+.about__container {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.about__text {
+  display: flex;
+  margin-top: 70px;
+  justify-content: space-between;
+}
+
+.about__text-column {
+  max-width: calc(50% - 20px);
+  width: 100%;
+}
+
+.about__text-title {
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.04em;
+  color: #FFFFFF;
+  margin: 0;
+  font-weight: normal;
+}
+
+.about__text-description {
+  margin: 26px 0 0;
+  font-size: 14px;
+  line-height: 20px;
+  color: #FFFFFF;
+}
+
+.about__graph {
+  margin-top: 110px;
+  width: 100%;
+  display: flex;
+}
+
+.about__graph-segment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.about__graph-segment:nth-child(1) {
+  max-width: 228px;
+}
+
+.about__graph-line {
+  padding: 9px 14px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.about__graph-line_color_green {
+  background-color: #3DDC84;
+}
+
+.about__graph-line_color_grey {
+  background-color: #303030;
+}
+
+.about__graph-week {
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  margin: 0;
+}
+
+.about__graph-week_color_black {
+  color: #000000;
+}
+
+.about__graph-week_color_white {
+  color: #FFFFFF;
+}
+
+.about__graph-title {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #8B8B8B;
+  margin: 14px 0 0;
+}
+
+@media screen and (max-width: 900px) {
+  .about__text-description {
+    font-size: 12px;
+  }
+
+  .about__text-column {
+    max-width: calc(50% - 15px);
+  }
+
+  .about__graph-segment:nth-child(1) {
+    max-width: 140px;
+  }
+
+  .about {
+    padding: 90px 30px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .about {
+    padding: 90px 14px;
+  }
+
+  .about__text {
+    flex-direction: column;
+  }
+
+  .about__text-column {
+    max-width: initial;
+  }
+
+  .about__text-column:nth-child(2) {
+    margin-top: 56px;
+  }
+
+  .about__graph-segment:nth-child(1) {
+    max-width: 100px;
+  }
+}
