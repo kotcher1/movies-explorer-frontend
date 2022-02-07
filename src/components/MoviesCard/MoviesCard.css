@@ -10,9 +10,14 @@
   align-items: center;
 }
 
+.card__image-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .card__image {
-  object-fit: cover;
-  max-height: 203px;
+  height: 203px;
 }
 
 .card:not(:nth-child(3n+1)) {
