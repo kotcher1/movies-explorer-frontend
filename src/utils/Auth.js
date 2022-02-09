@@ -1,12 +1,12 @@
 export const BASE_URL = 'https://blinov-api.nomoredomains.work';
 
-export const register = (userName, password, email) => {
-  return fetch(`${BASE_URL}/sign-up`, {
+export const register = (name, password, email) => {
+  return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({userName, password, email})
+    body: JSON.stringify({name, password, email})
   })
   .then((response) => {
     return response.json();
@@ -14,7 +14,7 @@ export const register = (userName, password, email) => {
 };
 
 export const login = (email, password) => {
-  return fetch(`${BASE_URL}/sign-in`, {
+  return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -23,8 +23,8 @@ export const login = (email, password) => {
   })
   .then((response => response.json()))
   .then((data) => {
-    if (data.token){
-      localStorage.setItem('jwt', data.token);
+    if (data.jwt){
+      localStorage.setItem('jwt', data.jwt);
       return data;
     } 
   })

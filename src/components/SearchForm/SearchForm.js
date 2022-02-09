@@ -21,7 +21,7 @@ const SearchForm = (props) => {
     <div className="search-form">
       <div className="search-form__container">
         <div className="search-form__search-line">
-          <input className="search-form__search-input" type="text" placeholder="Фильм" onChange={handleChange} minLength="1" required/>
+          <input className="search-form__search-input" defaultValue={props.page === "movies" ? localStorage.getItem('moviesSearchValue') : localStorage.getItem('savedMoviesSearchValue')} type="text" placeholder="Фильм" onChange={handleChange} minLength="1" required/>
           <span className="search-form__input-error" id="name-error">
                 Что-то пошло не так...
           </span>

@@ -9,15 +9,15 @@ const Navigation = (props) => {
         <ul className={`navigation__list ${props.mobileVisibility === 'hide' ? 'navigation__list_view_mobile' : ''}`}>
           {props.mobileVisibility === 'hide' && (
             <li className="navigation__item navigation__item_hidden" key="Главная">
-              <a className="navigation__item-link" href="/" target="_blank" rel="noreferrer">
+              <a className={`navigation__item-link ${props.activeLink === '/' ? 'navigation__item-link_active' : ''}`} href="/" target="_blank" rel="noreferrer" >
                 Главная
               </a>
             </li>
           )}
-          {props.nav.map(item => {
+          {props.nav && props.nav.map(item => {
             return (
               <li className="navigation__item" key={item.name}>
-                <a className={`navigation__item-link ${item.isActive ? 'navigation__item-link_active' : ''}`} href={item.link} target="_blank" rel="noreferrer">
+                <a className={`navigation__item-link ${props.activeLink === item.link ? 'navigation__item-link_active' : ''}`} href={item.link} target="_blank" rel="noreferrer">
                   {item.name}
                 </a>
               </li>

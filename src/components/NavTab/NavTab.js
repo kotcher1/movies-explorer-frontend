@@ -15,7 +15,7 @@ const NavTab = (props) => {
   return (
     <div className={`navigation-tab`}>
       <div className={`navigation-tab__container ${props.mobileVisibility === 'hide' ? 'navigation-tab__container_view_mobile' : ''} ${!isMenuOpen && props.mobileVisibility === 'hide' ? 'navigation-tab__container_visibility_hidden' : ''}`}>
-        <Navigation nav={props.nav} mobileVisibility={props.mobileVisibility}/>
+        <Navigation activeLink={props.activeLink} nav={props.nav} mobileVisibility={props.mobileVisibility}/>
         {props.param === 'button' && (
           <a className="navigation-tab__button" href="/sign-in">
             Войти

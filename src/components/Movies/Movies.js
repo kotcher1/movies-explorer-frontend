@@ -7,26 +7,15 @@ import Footer from '../Footer/Footer'
 import Preloader from '../Preloader/Preloader'
 
 
-const Movies = ({updateMovies, loading, message}) => {
+const Movies = ({activeLink, navigation, updateMovies, loading, message, param, mobileVisibility, saveMovie, deleteMovie, savedMovies}) => {
 
-  const navigation = [
-    {
-      name: 'Фильмы',
-      link: '/movies',
-      isActive: true,
-    },
-    {
-      name: 'Сохранённые фильмы',
-      link: '/saved-movies'
-    }
-  ]
-
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(localStorage.getItem('moviesSearchValue') || '');
   const [relevantMovies, setRelevantMovies] = useState([]);
   const [check, setCheck] = useState(false);
 
   function updateValue(currentValue) {
     setValue(currentValue);
+    localStorage.setItem('moviesSearchValue', currentValue);
   }
 
   function updateCheck(value) {
@@ -50,12 +39,13 @@ const Movies = ({updateMovies, loading, message}) => {
     setRelevantMovies(movies)
   }, [value, check])
 
+
   return (
     <div className="movies">
-      <Header nav={navigation} param="account" mobileVisibility="hide"/>
+      <Header nav={navigation} param={param} mobileVisibility={mobileVisibility} activeLink={activeLink}/>
       <main>
-        <SearchForm update={updateValue} updateCheck={updateCheck}/>
-        {value && (loading ? <Preloader /> : <MoviesCardList message={message}  relevantMovies={relevantMovies} searchValue={value} moviesState="all" button/>)}
+        <SearchForm update={updateValue} page="movies" updateCheck={updateCheck}/>
+        {value && (loading ? <Preloader /> : <MoviesCardList deleteMovie={deleteMovie} saveMovie={saveMovie} message={message}  relevantMovies={relevantMovies} searchValue={value} moviesState="all" button savedMovies={savedMovies}/>)}
       </main>
       <Footer noMargin/>
     </div>
