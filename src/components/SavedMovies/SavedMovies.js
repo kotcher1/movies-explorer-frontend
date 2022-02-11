@@ -1,13 +1,16 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import './SavedMovies.css'
 import Header from '../Header/Header'
 import SearchForm from '../SearchForm/SearchForm'
 import MoviesCardList from '../MoviesCardList/MoviesCardList'
 import Footer from '../Footer/Footer'
 import Preloader from '../Preloader/Preloader'
+import { CurrentUserContext } from '../../contexts/CurrentUserContext'
 
 
 const SavedMovies = ({activeLink, navigation, loading, message, param, mobileVisibility, moviesList, deleteMovie, loadingStatus}) => {
+
+  const currentUser = useContext(CurrentUserContext);
 
   const [value, setValue] = useState(localStorage.getItem('savedMoviesSearchValue') || '');
   const [relevantMovies, setRelevantMovies] = useState(moviesList);
@@ -29,12 +32,14 @@ const SavedMovies = ({activeLink, navigation, loading, message, param, mobileVis
     const allMovies = moviesList;
     if(allMovies) {
         allMovies.forEach(movie => {
-          if (movie.nameRU.includes(value) && check) {
-            if(movie.duration <= 40) {
+          if(movie.owner === currentUser._id) {
+            if (movie.nameRU.includes(value) && check) {
+              if(movie.duration <= 40) {
+                movies.push(movie);
+              }
+            } else if (movie.nameRU.includes(value)) {
               movies.push(movie);
             }
-          } else if (movie.nameRU.includes(value)) {
-            movies.push(movie);
           }
         })
       }

@@ -1,7 +1,10 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
 import './MoviesCard.css'
+import { CurrentUserContext } from '../../contexts/CurrentUserContext'
 
 const MoviesCard = (props) => {
+
+  const currentUser = useContext(CurrentUserContext);
 
   const [isLiked, setIsLiked] = useState(false);
 
@@ -40,7 +43,7 @@ const MoviesCard = (props) => {
   const handleCheckLike = () => {
     if(props.savedMovies) {
       props.savedMovies.forEach(movie => {
-        if (movie.movieId === props.info.id) {
+        if (movie.movieId === props.info.id && movie.owner === currentUser._id) {
           setIsLiked(true);
         }
       })
