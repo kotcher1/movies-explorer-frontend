@@ -8,22 +8,25 @@ import Preloader from '../Preloader/Preloader'
 import { CurrentUserContext } from '../../contexts/CurrentUserContext'
 
 
+const storageShortChecked = 'shortSavedMoviesChecked';
+
 const SavedMovies = ({activeLink, navigation, loading, message, param, mobileVisibility, moviesList, deleteMovie, loadingStatus}) => {
 
   const currentUser = useContext(CurrentUserContext);
 
   const [value, setValue] = useState(localStorage.getItem('savedMoviesSearchValue') || '');
   const [relevantMovies, setRelevantMovies] = useState(moviesList);
-  const [check, setCheck] = useState(false);
+  const [check, setCheck] = useState(localStorage.getItem(storageShortChecked) === 'true' ? true : false);
   
 
   function updateValue(currentValue) {
-    setValue(currentValue);
-    localStorage.setItem('savedMoviesSearchValue', currentValue);
+    setValue(currentValue.toLowerCase());
+    localStorage.setItem('savedMoviesSearchValue', currentValue.toLowerCase());
   }
 
   function updateCheck(value) {
-    setCheck(value.toLowerCase());
+    setCheck(value);
+    localStorage.setItem(storageShortChecked, value);
   }
 
   useEffect(() => {
@@ -51,7 +54,7 @@ const SavedMovies = ({activeLink, navigation, loading, message, param, mobileVis
     <div className="saved-movies">
       <Header nav={navigation} param={param} mobileVisibility={mobileVisibility} activeLink={activeLink}/>
       <main>
-        <SearchForm update={updateValue} updateCheck={updateCheck}/>
+        <SearchForm update={updateValue} updateCheck={updateCheck} checked={check}/>
         {loading ? <Preloader /> : <MoviesCardList message={message} deleteMovie={deleteMovie} relevantMovies={relevantMovies} searchValue={value} moviesState="saved"/>}
       </main>
       <Footer noMargin/>
