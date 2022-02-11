@@ -1,6 +1,9 @@
 export const BASE_URL = 'https://blinov-api.nomoredomains.work';
 
 export const register = (name, password, email) => {
+  console.log(
+    'fetch'
+  )
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
     headers: {

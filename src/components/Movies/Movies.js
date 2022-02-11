@@ -7,7 +7,7 @@ import Footer from '../Footer/Footer'
 import Preloader from '../Preloader/Preloader'
 
 const storageShortChecked = 'shortMoviesChecked';
-const Movies = ({activeLink, navigation, loading, message, param, mobileVisibility, saveMovie, deleteMovie, savedMovies, moviesList, loadingStatus }) => {
+const Movies = ({activeLink, navigation, message, param, mobileVisibility, saveMovie, deleteMovie, savedMovies, moviesList, loading }) => {
 
   const [value, setValue] = useState(localStorage.getItem('moviesSearchValue') || '');
   const [relevantMovies, setRelevantMovies] = useState([]);
@@ -22,12 +22,11 @@ const Movies = ({activeLink, navigation, loading, message, param, mobileVisibili
     localStorage.setItem(storageShortChecked, value);
     setCheck(value);
   }
-
-  useEffect(() => {
-    loadingStatus(true);
+  
+  function setMovieList() {
     let currentMovies = [];
     if(moviesList) {
-          moviesList.forEach(movie => {
+        moviesList.forEach(movie => {
       if (movie.nameRU.toLowerCase().includes(value) && check) {
         if(movie.duration <= 40) {
           currentMovies.push(movie);
@@ -38,9 +37,11 @@ const Movies = ({activeLink, navigation, loading, message, param, mobileVisibili
     })
     }
     setRelevantMovies(currentMovies)
-    loadingStatus(false);
-  }, [value, check])
+  }
 
+  useEffect(() => {
+    setMovieList();
+  }, [value, check, moviesList])
 
   return (
     <div className="movies">

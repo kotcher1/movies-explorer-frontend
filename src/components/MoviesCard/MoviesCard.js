@@ -10,6 +10,7 @@ const MoviesCard = (props) => {
 
   const handleLike = (e) => {
     if(e.target.classList.contains('card__close')) {
+      console.log('try to delete')
       props.deleteMovie(props.info._id);
     } else {
       if(!isLiked) {

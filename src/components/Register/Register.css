@@ -116,6 +116,14 @@
   opacity: .6;
 }
 
+.register__error-messsage {
+  margin-top: 20px;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+  color: #EE3465;
+}
+
 @media screen and (max-width: 640px) {
   .register {
     padding: 56px 30px 30px;

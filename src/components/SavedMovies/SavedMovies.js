@@ -10,7 +10,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext'
 
 const storageShortChecked = 'shortSavedMoviesChecked';
 
-const SavedMovies = ({activeLink, navigation, loading, message, param, mobileVisibility, moviesList, deleteMovie, loadingStatus}) => {
+const SavedMovies = ({activeLink, navigation, loading, message, param, mobileVisibility, moviesList, deleteMovie }) => {
 
   const currentUser = useContext(CurrentUserContext);
 
@@ -30,7 +30,6 @@ const SavedMovies = ({activeLink, navigation, loading, message, param, mobileVis
   }
 
   useEffect(() => {
-    loadingStatus(true);
     let movies = [];
     const allMovies = moviesList;
     if(allMovies) {
@@ -47,7 +46,6 @@ const SavedMovies = ({activeLink, navigation, loading, message, param, mobileVis
         })
       }
     setRelevantMovies(movies);
-    loadingStatus(false);
   }, [value, check, moviesList])
 
   return (

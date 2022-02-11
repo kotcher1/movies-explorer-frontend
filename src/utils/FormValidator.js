@@ -1,3 +1,5 @@
+import { isEmail } from 'validator';
+
 export default class FormValidator {
   constructor(configObject, formElement) {
     this._inputSelector = configObject.inputSelector;
@@ -31,6 +33,15 @@ export default class FormValidator {
   };
 
   _checkInputValidity(inputElement) {
+    if (inputElement.type ==="email") {
+      if  (!isEmail(inputElement.value)) {
+        this._showInputError(inputElement);
+      } else {
+        this._hideInputError(inputElement);
+      }
+      return 
+    }
+    
     if (!inputElement.validity.valid) {
       this._showInputError(inputElement);
     } else {

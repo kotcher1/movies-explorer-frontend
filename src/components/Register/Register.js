@@ -11,6 +11,7 @@ const Register = (props) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
 
   const handleChangeName = (e) => {
     const {value} = e.target;
@@ -33,7 +34,8 @@ const Register = (props) => {
     e.preventDefault();
     register(name, password, email)
     .then((res) => {
-      if(!res.error){
+      if(!res.error && !res.message){
+        setMessage('');
         login(email, password)
         .then((data) => {
           if (data) {
@@ -45,6 +47,8 @@ const Register = (props) => {
           }
         })
         .catch(err => console.log(err));
+      } else {
+        setMessage(res.message);
       }
     })
     .catch(err => {
@@ -105,6 +109,9 @@ useEffect(() => {
               </span>
             </div>
           </div>
+          <p className="register__error-messsage">
+            {message ? message : ''}
+          </p>
           <div className="register__form-buttons">
             <button type="submit" className="register__button">
               Зарегистрироваться

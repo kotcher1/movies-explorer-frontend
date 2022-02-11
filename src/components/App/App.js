@@ -7,7 +7,7 @@ import Register from '../Register/Register'
 import Login from '../Login/Login'
 import Page404 from '../Page404/Page404' 
 import React, {useState, useEffect} from 'react'
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import { useHistory } from "react-router";
 
 import {moviesApi} from '../../utils/MoviesApi'
@@ -25,7 +25,7 @@ function App() {
   const [email, setEmail] = useState('');
   const [user, setUser] = useState('');
   const [loggedStatus, setLoggedStatus] = useState(false);
-  const [allReady, setAllReady] = useState(false);
+  const [loginChecked, setLoginChecked] = useState(false);
   const [buttonStatus, setButtonStatus] = useState("button");
   const [navigation, setNavigation] = useState([]);
   const [mobileVisibility, setMobileVisibility] = useState('');
@@ -46,16 +46,20 @@ function App() {
         }
       })
       .catch(err => console.log(err))
-      .finally(() =>  setAllReady(true))
+      .finally(() =>  {
+        setLoginChecked(true);
+      })
     }
   }
 
   const handleGetMovies = () => {
     mainApi.getMovies()
     .then((res) => {
+      setIsLoading(true);
       setSavedMovies(res.data);
     })
     .catch(err => console.log(err))
+    .finally(() =>  setIsLoading(false))
   }
 
   const handleAddMovie = (
@@ -93,9 +97,9 @@ function App() {
   const handleDeleteMovie = (id) => {
     mainApi.deleteCard(id)
     .then((res) => {
-      let updatedMovies = savedMovies;
+      let updatedMovies = [...savedMovies];
       let movieIndex;
-      savedMovies.forEach((movie, index) => {
+      updatedMovies.forEach((movie, index) => {
         if(movie.movieId === res.data.movieId) {
           movieIndex = index;
         }
@@ -107,7 +111,6 @@ function App() {
   }
 
   const handleUpdateInfo = (newName, newEmail) => {
-    console.log(currentUser)
     mainApi.updateUser(newName, newEmail)
     .then((res) => {
       if(res){
@@ -126,16 +129,14 @@ function App() {
     setNotFoundMessage('Ничего не найдено');
     moviesApi.getMovies()
     .then(info => {
-     setMovies(info)
+      setIsLoading(true);
+      setMovies(info)
     })
     .catch((err) => {
       setNotFoundMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
       console.log(err);
     })
-  }
-
-  const handleUpdateLoading = (value) => {
-    setIsLoading(value);
+    .finally(() =>  setIsLoading(false))
   }
 
   useEffect(() => {
@@ -181,6 +182,7 @@ function App() {
 
   const handleLogin = () => {
     setLoggedStatus(true);
+    setLoginChecked(true);
   }
 
   const handleEmail = (email) => {
@@ -189,9 +191,13 @@ function App() {
 
   const handleOut = () => {
     localStorage.removeItem('jwt');
+    localStorage.removeItem('shortMoviesChecked');
+    localStorage.removeItem('moviesSearchValue');
+    localStorage.removeItem('shortSavedMoviesChecked');
+    localStorage.removeItem('savedMoviesSearchValue');
     setEmail('');
     setLoggedStatus(false);
-    history.push("/sign-in");
+    history.push("/");
   }
 
   return (
@@ -200,29 +206,21 @@ function App() {
         <main>
           <Switch>
             <Main navigation={navigation} param={buttonStatus} exact path="/" loggedIn={loggedStatus}  mobileVisibility={mobileVisibility} activeLink='/'/>
-            {allReady && (
-              <ProtectedRoute exact path="/movies" navigation={navigation} param={buttonStatus} activeLink='/movies'  loggedIn={loggedStatus}  mobileVisibility={mobileVisibility} component={Movies} message={notFoundMessage} deleteMovie={handleDeleteMovie} moviesList={movies} loadingStatus={handleUpdateLoading} saveMovie={handleAddMovie} savedMovies={savedMovies}>
-              </ProtectedRoute>
-            )}
-            {allReady && (
-              <ProtectedRoute component={SavedMovies} navigation={navigation} param={buttonStatus} activeLink='/saved-movies' loggedIn={loggedStatus}  mobileVisibility={mobileVisibility} exact path="/saved-movies" message={notFoundMessage} deleteMovie={handleDeleteMovie} loadingStatus={handleUpdateLoading} moviesList={savedMovies} loading={isLoading}>
-              </ProtectedRoute>
-            )}
-            {allReady && (
-              <ProtectedRoute exact path="/profile" update={handleUpdateInfo} navigation={navigation} param={buttonStatus} loggedIn={loggedStatus} mobileVisibility={mobileVisibility} component={Profile} handleOut={handleOut} name={user} email={email} loading={isLoading}>
-              </ProtectedRoute>
-            )}
+            <ProtectedRoute exact path="/movies" navigation={navigation} param={buttonStatus} activeLink='/movies' loggedIn={loggedStatus} loginChecked={loginChecked} mobileVisibility={mobileVisibility} component={Movies} message={notFoundMessage} deleteMovie={handleDeleteMovie} moviesList={movies} saveMovie={handleAddMovie} savedMovies={savedMovies} loading={isLoading}>
+            </ProtectedRoute>
+            <ProtectedRoute component={SavedMovies} navigation={navigation} param={buttonStatus} activeLink='/saved-movies' loggedIn={loggedStatus} loginChecked={loginChecked} mobileVisibility={mobileVisibility} exact path="/saved-movies" message={notFoundMessage} deleteMovie={handleDeleteMovie} moviesList={savedMovies} loading={isLoading}>
+            </ProtectedRoute>
+            <ProtectedRoute exact path="/profile" update={handleUpdateInfo} navigation={navigation} param={buttonStatus} loggedIn={loggedStatus} loginChecked={loginChecked} mobileVisibility={mobileVisibility} component={Profile} handleOut={handleOut} name={user} email={email}>
+            </ProtectedRoute>
             <Route exact path="/sign-up">
-              <Register handleEmail={handleEmail} handleLogin={handleLogin}/>
+              {loggedStatus ? <Redirect to="/"/> : <Register handleEmail={handleEmail} handleLogin={handleLogin}/>}
             </Route>
             <Route exact path="/sign-in">
-              <Login handleLogin={handleLogin} handleEmail={handleEmail}/>
+              {loggedStatus ? <Redirect to="/"/> : <Login handleLogin={handleLogin} handleEmail={handleEmail}/>}
             </Route>
-            {allReady && (
-              <Route path="*">
-                <Page404 />
-              </Route>
-            )}
+            <Route path="*">
+              <Page404 />
+            </Route>
           </Switch>
         </main>
       </div>
