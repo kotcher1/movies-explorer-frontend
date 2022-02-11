@@ -1,10 +1,13 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import './Profile.css'
 import Header from '../Header/Header'
 import FormValidator from '../../utils/FormValidator';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext'
 
 
 const Profile = (props) => {
+
+  const currentUser = useContext(CurrentUserContext);
 
   const [isEdit, setIsEdit] = useState(false);
   const [name, setName] = useState(props.name);
@@ -13,7 +16,11 @@ const Profile = (props) => {
   const handlerEditClick = (e) => {
     e.preventDefault();
     if (e.target.type === "submit") {
-      props.update(name, email)
+      if (name !== currentUser.name || email !== currentUser.email) {
+        console.log(name, currentUser.name, email, currentUser.email)
+        props.update(name, email)
+        console.log('kkkk')
+      }
       setIsEdit(false);
     } else {
       setIsEdit(true);

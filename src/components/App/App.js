@@ -106,12 +106,17 @@ function App() {
     .catch(err => console.log(err))
   }
 
-  const handleUpdateInfo = (name, email) => {
-    mainApi.updateUser(name, email)
+  const handleUpdateInfo = (newName, newEmail) => {
+    console.log(currentUser)
+    mainApi.updateUser(newName, newEmail)
     .then((res) => {
       if(res){
         setEmail(res.data.email);
         setUser(res.data.name);
+        setCurrentUser({
+          name: newName,
+          email: newEmail,
+        })
       }
     })
     .catch(err => console.log(err))
