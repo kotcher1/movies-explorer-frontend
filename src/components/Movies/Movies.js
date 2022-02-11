@@ -19,7 +19,7 @@ const Movies = ({activeLink, navigation, loading, message, param, mobileVisibili
   }
 
   function updateCheck(value) {
-    setCheck(value);
+    setCheck(value.toLowerCase());
   }
 
   useEffect(() => {
@@ -27,11 +27,11 @@ const Movies = ({activeLink, navigation, loading, message, param, mobileVisibili
     let currentMovies = [];
     if(moviesList) {
           moviesList.forEach(movie => {
-      if (movie.nameRU.includes(value) && check) {
+      if (movie.nameRU.toLowerCase().includes(value) && check) {
         if(movie.duration <= 40) {
           currentMovies.push(movie);
         }
-      } else if (movie.nameRU.includes(value)) {
+      } else if (movie.nameRU.toLowerCase().includes(value)) {
         currentMovies.push(movie);
       }
     })

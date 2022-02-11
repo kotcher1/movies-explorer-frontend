@@ -23,7 +23,7 @@ const SavedMovies = ({activeLink, navigation, loading, message, param, mobileVis
   }
 
   function updateCheck(value) {
-    setCheck(value);
+    setCheck(value.toLowerCase());
   }
 
   useEffect(() => {
@@ -33,11 +33,11 @@ const SavedMovies = ({activeLink, navigation, loading, message, param, mobileVis
     if(allMovies) {
         allMovies.forEach(movie => {
           if(movie.owner === currentUser._id) {
-            if (movie.nameRU.includes(value) && check) {
+            if (movie.nameRU.toLowerCase().includes(value) && check) {
               if(movie.duration <= 40) {
                 movies.push(movie);
               }
-            } else if (movie.nameRU.includes(value)) {
+            } else if (movie.nameRU.toLowerCase().includes(value)) {
               movies.push(movie);
             }
           }
