@@ -24,7 +24,7 @@ const NavTab = (props) => {
         {props.param === 'account' && (
           <a className={`navigation-tab__account-block ${props.mobileVisibility === 'hide' ? 'navigation-tab__account-block_hidden' : ''} `} href="/profile">
             <p className="navigation-tab__account-text">
-            Аккаунт
+              Аккаунт
             </p>
             <div className="navigation-tab__account-image-container">
               <img className="navigation-tab__account-image" alt="account" src={AccountImage}/>

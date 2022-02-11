@@ -50,12 +50,18 @@ const MoviesCard = (props) => {
     }
   }
 
+  const handleClickCard = (e) => {
+    if(!e.target.classList.contains('card__like') && !e.target.classList.contains('card__close')) {
+      window.open(props.info.trailerLink || props.info.trailer, '_blank');
+    }
+  }
+
   useEffect(() => {
     handleCheckLike()
   }, [])
 
   return (
-    <div className="card">
+    <div className="card" onClick={handleClickCard}>
       <div className="card__image-container">
         <img className="card__image" src={props.moviesState === "saved" ? props.info.image : `https://api.nomoreparties.co/${props.info.image.url}`} alt="cover"/>
       </div>
