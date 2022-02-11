@@ -119,7 +119,6 @@ function App() {
 
   const getMoviesInfo = () => {
     setNotFoundMessage('Ничего не найдено');
-    setIsLoading(true);
     moviesApi.getMovies()
     .then(info => {
      setMovies(info)
@@ -128,15 +127,11 @@ function App() {
       setNotFoundMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
       console.log(err);
     })
-    .finally(() => {
-      setIsLoading(false);
-    });
   }
 
-  const handleUpdateMovies = () => {
-    getMoviesInfo();
-    return movies;
-  } 
+  const handleUpdateLoading = (value) => {
+    setIsLoading(value);
+  }
 
   useEffect(() => {
     handleTokenCheck();
@@ -201,15 +196,15 @@ function App() {
           <Switch>
             <Main navigation={navigation} param={buttonStatus} exact path="/" loggedIn={loggedStatus}  mobileVisibility={mobileVisibility} activeLink='/'/>
             {allReady && (
-              <ProtectedRoute exact path="/movies" navigation={navigation} param={buttonStatus} activeLink='/movies'  loggedIn={loggedStatus}  mobileVisibility={mobileVisibility} component={Movies} message={notFoundMessage} updateMovies={handleUpdateMovies} deleteMovie={handleDeleteMovie} moviesList={movies} loading={isLoading} saveMovie={handleAddMovie} savedMovies={savedMovies}>
+              <ProtectedRoute exact path="/movies" navigation={navigation} param={buttonStatus} activeLink='/movies'  loggedIn={loggedStatus}  mobileVisibility={mobileVisibility} component={Movies} message={notFoundMessage} deleteMovie={handleDeleteMovie} moviesList={movies} loadingStatus={handleUpdateLoading} saveMovie={handleAddMovie} savedMovies={savedMovies}>
               </ProtectedRoute>
             )}
             {allReady && (
-              <ProtectedRoute component={SavedMovies} navigation={navigation} param={buttonStatus} activeLink='/saved-movies' loggedIn={loggedStatus}  mobileVisibility={mobileVisibility} exact path="/saved-movies" message={notFoundMessage} updateMovies={handleUpdateMovies} deleteMovie={handleDeleteMovie} loading={isLoading} moviesList={savedMovies}>
+              <ProtectedRoute component={SavedMovies} navigation={navigation} param={buttonStatus} activeLink='/saved-movies' loggedIn={loggedStatus}  mobileVisibility={mobileVisibility} exact path="/saved-movies" message={notFoundMessage} deleteMovie={handleDeleteMovie} loadingStatus={handleUpdateLoading} moviesList={savedMovies} loading={isLoading}>
               </ProtectedRoute>
             )}
             {allReady && (
-              <ProtectedRoute exact path="/profile" update={handleUpdateInfo} navigation={navigation} param={buttonStatus} loggedIn={loggedStatus} mobileVisibility={mobileVisibility} component={Profile} handleOut={handleOut} name={user} email={email}>
+              <ProtectedRoute exact path="/profile" update={handleUpdateInfo} navigation={navigation} param={buttonStatus} loggedIn={loggedStatus} mobileVisibility={mobileVisibility} component={Profile} handleOut={handleOut} name={user} email={email} loading={isLoading}>
               </ProtectedRoute>
             )}
             <Route exact path="/sign-up">
