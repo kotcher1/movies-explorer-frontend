@@ -77,6 +77,16 @@
   border: none;
 }
 
+.register__button_disable {
+  opacity: .6;
+  pointer-events: none;
+}
+
+.register__button:disabled {
+  opacity: .6;
+  pointer-events: none;
+}
+
 .register__button:hover {
   opacity: .6;
 }
@@ -109,6 +119,14 @@
 
 .register__sign-in-link:hover {
   opacity: .6;
+}
+
+.register__error-messsage {
+  margin-top: 20px;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+  color: #EE3465;
 }
 
 @media screen and (max-width: 640px) {

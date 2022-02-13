@@ -1,6 +1,8 @@
 .footer {
   background-color: #202020;
   padding: 79px 70px 0;
+  max-width: 1140px;
+  margin: 0 auto;
 }
 
 .footer__width_narrow {

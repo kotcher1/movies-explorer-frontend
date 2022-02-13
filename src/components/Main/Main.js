@@ -5,18 +5,11 @@ import Techs from '../Techs/Techs'
 import AboutMe from '../AboutMe/AboutMe'
 import Footer from '../Footer/Footer'
 
-const Main = () => {
-
-  const navigation = [
-    {
-      name: 'Регистрация',
-      link: '/sign-up',
-    }
-  ]
+const Main = (props) => {
 
   return (
     <div>
-      <Promo nav={navigation} param='button'/>
+      <Promo activeLink={props.activeLink} nav={props.navigation} param={props.param} mobileVisibility={props.mobileVisibility}/>
       <main>
         <AboutProject />
         <Techs />

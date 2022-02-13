@@ -1,35 +1,63 @@
-import React from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import './SavedMovies.css'
 import Header from '../Header/Header'
 import SearchForm from '../SearchForm/SearchForm'
 import MoviesCardList from '../MoviesCardList/MoviesCardList'
 import Footer from '../Footer/Footer'
+import Preloader from '../Preloader/Preloader'
+import { CurrentUserContext } from '../../contexts/CurrentUserContext'
 
 
-const Movies = () => {
+const storageShortChecked = 'shortSavedMoviesChecked';
 
-  const navigation = [
-    {
-      name: 'Фильмы',
-      link: '/movies'
-    },
-    {
-      name: 'Сохранённые фильмы',
-      link: '/saved-movies',
-      isActive: true,
-    }
-  ]
+const SavedMovies = ({activeLink, navigation, loading, message, param, mobileVisibility, moviesList, deleteMovie }) => {
+
+  const currentUser = useContext(CurrentUserContext);
+
+  const [value, setValue] = useState(localStorage.getItem('savedMoviesSearchValue') || '');
+  const [relevantMovies, setRelevantMovies] = useState(moviesList);
+  const [check, setCheck] = useState(localStorage.getItem(storageShortChecked) === 'true' ? true : false);
+  
+
+  function updateValue(currentValue) {
+    setValue(currentValue.toLowerCase());
+    localStorage.setItem('savedMoviesSearchValue', currentValue.toLowerCase());
+  }
+
+  function updateCheck(value) {
+    setCheck(value);
+    localStorage.setItem(storageShortChecked, value);
+  }
+
+  useEffect(() => {
+    let movies = [];
+    const allMovies = moviesList;
+    if(allMovies) {
+        allMovies.forEach(movie => {
+          if(movie.owner === currentUser._id) {
+            if (movie.nameRU.toLowerCase().includes(value) && check) {
+              if(movie.duration <= 40) {
+                movies.push(movie);
+              }
+            } else if (movie.nameRU.toLowerCase().includes(value)) {
+              movies.push(movie);
+            }
+          }
+        })
+      }
+    setRelevantMovies(movies);
+  }, [value, check, moviesList])
 
   return (
     <div className="saved-movies">
-      <Header nav={navigation} param="account" mobileVisibility="hide"/>
+      <Header nav={navigation} param={param} mobileVisibility={mobileVisibility} activeLink={activeLink}/>
       <main>
-        <SearchForm />
-        <MoviesCardList moviesState="saved"/>
+        <SearchForm update={updateValue} updateCheck={updateCheck} checked={check}/>
+        {loading ? <Preloader /> : <MoviesCardList message={message} deleteMovie={deleteMovie} relevantMovies={relevantMovies} searchValue={value} moviesState="saved"/>}
       </main>
       <Footer noMargin/>
     </div>
   )
 }
 
-export default Movies
+export default SavedMovies
