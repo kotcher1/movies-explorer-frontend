@@ -35,9 +35,14 @@ const Login = (props) => {
         setEmail('');
         props.handleLogin();
         history.push('/movies');
+      } else {
+        alert("Неверный логин или пароль");
       }
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      alert("Возникла ошибка");
+      console.log(err)
+    });
   }
 
   const formParameters = {

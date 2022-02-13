@@ -82,6 +82,11 @@
   pointer-events: none;
 }
 
+.login__button:disabled {
+  opacity: .6;
+  pointer-events: none;
+}
+
 .login__button:hover {
   opacity: .6;
 }

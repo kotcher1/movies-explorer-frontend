@@ -30,6 +30,7 @@ function App() {
   const [navigation, setNavigation] = useState([]);
   const [mobileVisibility, setMobileVisibility] = useState('');
   const [savedMovies, setSavedMovies] = useState([]);
+  const [successUpdate, setSuccessUpdate] = useState(false);
 
   const history = useHistory();
   
@@ -45,10 +46,15 @@ function App() {
           setUser(res.data.name);
         }
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        alert("Возникла ошибка");
+        console.log(err)
+      })
       .finally(() =>  {
         setLoginChecked(true);
       })
+    } else {
+      setLoginChecked(true);
     }
   }
 
@@ -58,7 +64,10 @@ function App() {
       setIsLoading(true);
       setSavedMovies(res.data);
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      alert("Возникла ошибка");
+      console.log(err)
+    })
     .finally(() =>  setIsLoading(false))
   }
 
@@ -91,7 +100,10 @@ function App() {
     .then((res) => {
       setSavedMovies(state => [...state, res.data])
     })  
-    .catch(err => console.log(err))
+    .catch(err => {
+      alert("Возникла ошибка");
+      console.log(err)
+    })
   }
 
   const handleDeleteMovie = (id) => {
@@ -107,7 +119,10 @@ function App() {
       updatedMovies.splice(movieIndex, 1);
       setSavedMovies(updatedMovies);
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      alert("Возникла ошибка");
+      console.log(err)
+    })
   }
 
   const handleUpdateInfo = (newName, newEmail) => {
@@ -120,9 +135,13 @@ function App() {
           name: newName,
           email: newEmail,
         })
+        setSuccessUpdate(true);
       }
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      alert("Возникла ошибка");
+      console.log(err)
+    })
   }
 
   const getMoviesInfo = () => {
@@ -200,6 +219,10 @@ function App() {
     history.push("/");
   }
 
+  const handleChangeSuccessUpdate = () => {
+    setSuccessUpdate(false);
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -210,7 +233,7 @@ function App() {
             </ProtectedRoute>
             <ProtectedRoute component={SavedMovies} navigation={navigation} param={buttonStatus} activeLink='/saved-movies' loggedIn={loggedStatus} loginChecked={loginChecked} mobileVisibility={mobileVisibility} exact path="/saved-movies" message={notFoundMessage} deleteMovie={handleDeleteMovie} moviesList={savedMovies} loading={isLoading}>
             </ProtectedRoute>
-            <ProtectedRoute exact path="/profile" update={handleUpdateInfo} navigation={navigation} param={buttonStatus} loggedIn={loggedStatus} loginChecked={loginChecked} mobileVisibility={mobileVisibility} component={Profile} handleOut={handleOut} name={user} email={email}>
+            <ProtectedRoute exact path="/profile" updateText={successUpdate} hideUpdateText={handleChangeSuccessUpdate} update={handleUpdateInfo} navigation={navigation} param={buttonStatus} loggedIn={loggedStatus} loginChecked={loginChecked} mobileVisibility={mobileVisibility} component={Profile} handleOut={handleOut} name={user} email={email}>
             </ProtectedRoute>
             <Route exact path="/sign-up">
               {loggedStatus ? <Redirect to="/"/> : <Register handleEmail={handleEmail} handleLogin={handleLogin}/>}

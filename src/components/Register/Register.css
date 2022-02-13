@@ -82,6 +82,11 @@
   pointer-events: none;
 }
 
+.register__button:disabled {
+  opacity: .6;
+  pointer-events: none;
+}
+
 .register__button:hover {
   opacity: .6;
 }

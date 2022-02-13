@@ -34,7 +34,7 @@ export default class FormValidator {
 
   _checkInputValidity(inputElement) {
     if (inputElement.type ==="email") {
-      if  (!isEmail(inputElement.value)) {
+      if (!isEmail(inputElement.value)) {
         this._showInputError(inputElement);
       } else {
         this._hideInputError(inputElement);
@@ -52,7 +52,11 @@ export default class FormValidator {
   _showInputError(inputElement) {
     this._errorElement = this._formElement.querySelector(`#${inputElement.id} + ${this._errorClass}`);
     inputElement.classList.add(this._inputErrorClass);
-    this._errorElement.textContent = inputElement.validationMessage;
+    if(inputElement.type === "email") {
+      this._errorElement.textContent = 'Неверный формат Email';
+    } else {
+      this._errorElement.textContent = inputElement.validationMessage;
+    }
     this._errorElement.classList.add(this._errorVisibleClass);
   };
 
@@ -75,7 +79,11 @@ export default class FormValidator {
 
   _hasInvalidInput() {
     return this._inputList.some((inputElement) => {
-      return !inputElement.validity.valid;
+      if (inputElement.type ==="email") {
+        return !isEmail(inputElement.value);
+      } else {
+        return !inputElement.validity.valid;
+      }
     }); 
   }
 

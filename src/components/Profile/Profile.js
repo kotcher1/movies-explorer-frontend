@@ -17,13 +17,12 @@ const Profile = (props) => {
     e.preventDefault();
     if (e.target.type === "submit") {
       if (name !== currentUser.name || email !== currentUser.email) {
-        console.log(name, currentUser.name, email, currentUser.email)
         props.update(name, email)
-        console.log('kkkk')
       }
       setIsEdit(false);
     } else {
       setIsEdit(true);
+      props.hideUpdateText();
     }
   }
 
@@ -50,6 +49,10 @@ const Profile = (props) => {
       loginFormValidator.enableValidation()
     }
   }, [email, name])
+
+  useEffect(() => {
+    props.hideUpdateText();
+  }, [])
 
   return (
     <div className="profile">
@@ -94,6 +97,11 @@ const Profile = (props) => {
                 </p>
               )}
             </div>
+            {props.updateText && (
+              <p className="profile__update-text">
+                Изменения внесены
+              </p>
+            )}
             <div className="profile__buttons">
             {isEdit ? (
               <button className="profile__edit profile__edit_type_submit" type="submit" onClick={handlerEditClick}>

@@ -52,7 +52,8 @@ const Register = (props) => {
       }
     })
     .catch(err => {
-      console.log(err);
+      alert("Возникла ошибка");
+      console.log(err)
     })
  }
 
