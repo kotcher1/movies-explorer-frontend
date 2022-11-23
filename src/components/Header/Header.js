@@ -7,7 +7,7 @@ const Header = (props) => {
     <header className="header">
       <div className="header__container">
         <Logo />
-        <NavTab mobileVisibility={props.mobileVisibility} nav={props.nav} param={props.param}/>
+        <NavTab activeLink={props.activeLink} mobileVisibility={props.mobileVisibility} nav={props.nav} param={props.param}/>
       </div>
     </header>
   )

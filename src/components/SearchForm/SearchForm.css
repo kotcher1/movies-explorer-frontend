@@ -105,6 +105,19 @@
   left: calc(100% - 14px);
 }
 
+.search-form__input-error {
+  margin-top: 6px;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+  color: #EE3465;
+  display: none;
+}
+
+.search-form__input-error_visible {
+  display: block;
+}
+
 
 @media screen and (max-width: 900px) {
   .search-form__container {

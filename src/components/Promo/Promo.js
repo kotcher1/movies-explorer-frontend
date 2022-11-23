@@ -5,7 +5,7 @@ import Header from '../Header/Header'
 const Promo = (props) => {
   return (
     <div className="banner">
-      <Header nav={props.nav} param={props.param}/>
+      <Header activeLink={props.activeLink} mobileVisibility={props.mobileVisibility} nav={props.nav} param={props.param}/>
       <div className="banner__container">
         <h1 className="banner__title">
           Учебный проект студента факультета Веб-разработки.
