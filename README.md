@@ -1,4 +1,4 @@
-# Movie-Explorer
+# Movies-Explorer
 
 *(В рамках курса Frontend-Developer в Яндекс.Практикум)*
 
