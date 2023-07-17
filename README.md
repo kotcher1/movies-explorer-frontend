@@ -12,5 +12,9 @@
 
 Ссылка на репозиторий с бэкендом: https://github.com/kotcher1/movies-explorer-api
 
+Возможные дополнения:
+- оптимизация кода
+
+
 ![image](https://github.com/kotcher1/movies-explorer-frontend/assets/43149448/e9233657-d6f5-4dcd-b393-e86a670025f7)
 
