@@ -1,1 +1,16 @@
-[https://blinov-movies.nomoredomains.rocks/](https://blinov-movies.nomoredomains.rocks/) - ссылка на фронтенд
+#Movie-Explorer
+
+*(В рамках курса Frontend-Developer в Яндекс.Практикум)*
+
+Сервис, в котором можно найти фильмы по запросу и сохранить в личном кабинете. Фильмы можно сортировать по длительности. Включает в себя также страницы регистрации, авторизации и главную страницу с информацией о студенте (на странице тестовые данные).
+
+Технологии: HTML, CSS, React.
+
+Ссылка на проект: https://movies-explorer-frontend-eosin.vercel.app/
+
+В данный момент все Api запросы не работают, т.к. бэкенд не развернут на сервере.
+
+Ссылка на репозиторий с бэкендом: https://github.com/kotcher1/movies-explorer-api
+
+![image](https://github.com/kotcher1/movies-explorer-frontend/assets/43149448/e9233657-d6f5-4dcd-b393-e86a670025f7)
+
